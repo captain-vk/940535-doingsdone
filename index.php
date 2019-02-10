@@ -46,9 +46,7 @@
 						'Выполнен' =>'Нет']
 						];	
 												
-						?>
-
-						
+						?>						
 				<?php $OnDisplay = include_template('index.php',  ['arr2' => $arr2]);?>
 				<?php $LayoutContent = include_template('layout.php', 
 				['Content' => $OnDisplay,
