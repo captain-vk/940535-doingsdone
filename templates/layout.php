@@ -1,7 +1,7 @@
-<?php
- function CountTasks ($arr, $str)	{
+				<?php
+ function CountTasks ($arr2, $str)	{
 	$j=0;
-	foreach($arr as $key => $item)	{
+	foreach($arr2 as $key => $item)	{
 	if ($item['Категория']==$str) {
 		$j++;
 		}	
@@ -21,7 +21,7 @@ $show_complete_tasks = rand(0, 1);
 
 <head>
     <meta charset="UTF-8">
-    <title><?php =$NamePage;?></title>
+    <title><?php echo $NamePage;?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -79,7 +79,7 @@ $show_complete_tasks = rand(0, 1);
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
 
-<?php =$Content; ?>
+<?php echo $Content; ?>
 
         </div>
     </div>

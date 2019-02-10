@@ -1,4 +1,5 @@
 				<?php require_once ('functions.php')?>
+
 				
 				
 
@@ -48,11 +49,12 @@
 						?>
 
 						
-				<?php $OnDisplay = include_template('index',  ['arr2' => $arr2]);?>
-				<?php $LayoutContent = include_template('layout', 
-				['Content' => $OnDisplay],
-				['arr' => $arr],
-				['NamePage' => 'Дела хуево']);
+				<?php $OnDisplay = include_template('index.php',  ['arr2' => $arr2]);?>
+				<?php $LayoutContent = include_template('layout.php', 
+				['Content' => $OnDisplay,
+				'arr2' => $arr2,	
+				'arr' => $arr,
+				'NamePage' => 'Дела в порядке']);
 				print($LayoutContent);
 				?>		 
 									
