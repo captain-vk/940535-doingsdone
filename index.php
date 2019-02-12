@@ -71,7 +71,7 @@ $show_complete_tasks = rand(0, 1);
 						
 						1 =>[
 						'Задача' =>'Выполнить тестовое задание',
-						'Дата выполнения' =>'25.12.2019',
+						'Дата выполнения' =>'12.02.2019',
 						'Категория' =>'Работа',
 						'Выполнен' =>'Нет',
 						'Срочный' =>''],
@@ -108,21 +108,22 @@ $show_complete_tasks = rand(0, 1);
 								
 								date_default_timezone_set("Europe/Moscow");
 									// Текущая дата 
-									$now = new DateTime('');									
+									$now = new DateTime();									
 									
-									//$cur_date = date('d.m.Y');
-									//print($cur_date);
+									//$cur_date = date('');
+									//print($now);
 									foreach($arr2 as $key => $item)	{
 									if ($item['Дата выполнения'] =='Нет') {continue;}	
 										// Дата завершения
-									$taskDate = new DateTime(strtotime('d.m.Y', $item['Дата выполнения']));
+									$taskDate = new DateTime($item['Дата выполнения']);
 									// Получение интервала
 									
 									if ($item['Дата выполнения'] =='Нет') {continue;}
 									
 									$interval = date_diff($now, $taskDate);
-									if ( $interval == '0 days') {$item['Срочный']='Да';}
+									if ( $interval->d <= 0) {$item['Срочный']='Да';}
 									else {$item['Срочный']='Нет';} 
+									//echo $interval;
 									}
 
 								?>									
@@ -184,8 +185,8 @@ $show_complete_tasks = rand(0, 1);
                 <table class="tasks">
 										<?php foreach($arr2 as $key => $item):?>
 										<?if ($item['Выполнен']=='Да' and $show_complete_tasks == false) { continue; }?>
-                    <tr class="tasks__item task  <? if ($item['Выполнен']=='Да' and $item['Срочный']=='Нет'){echo 'task--completed';}
-					elseif ($item['Срочный']=='Да'){echo 'task--important';}?>"> 
+                    <tr class="tasks__item task  <? if ($item['Выполнен']=='Да' and $item['Срочный']=='Нет'){echo 'task--completed';}elseif ($item['Срочный']=='Да'){echo'task--important';}?>">  
+					
                         <td class="task__select">
 						
                             <label class="checkbox task__checkbox">
