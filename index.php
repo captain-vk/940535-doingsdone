@@ -121,8 +121,8 @@ $show_complete_tasks = rand(0, 1);
 									if ($item['Дата выполнения'] =='Нет') {continue;}
 									
 									$interval = date_diff($now, $taskDate);
-									if ( $interval->d <= 0) {$item['Срочный']='Да';}
-									else {$item['Срочный']='Нет';} 
+									if ( $interval->d <= 0) {$arr2[$key]['Срочный']='Да';}
+									else {$arr2[$key]['Срочный']='Нет';} 
 									//echo $interval;
 									}
 
@@ -185,7 +185,8 @@ $show_complete_tasks = rand(0, 1);
                 <table class="tasks">
 										<?php foreach($arr2 as $key => $item):?>
 										<?if ($item['Выполнен']=='Да' and $show_complete_tasks == false) { continue; }?>
-                    <tr class="tasks__item task  <? if ($item['Выполнен']=='Да' and $item['Срочный']=='Нет'){echo 'task--completed';}elseif ($item['Срочный']=='Да'){echo'task--important';}?>">  
+                    <tr class="tasks__item task <? if ($item['Выполнен']=='Да' and $item['Срочный']=='Нет'){echo 'task--completed';}
+					elseif ($item['Срочный']=='Да'){echo'task--important';}?>">  
 					
                         <td class="task__select">
 						
