@@ -126,7 +126,41 @@ $show_complete_tasks = rand(0, 1);
 									//echo $interval;
 									}
 
-								?>									
+								?>			
+
+
+<?php
+$con = mysqli_connect("localhost", "root", "","deals_allright");
+if ($con == false) {
+   print("Ошибка подключения: "
+. mysqli_connect_error());
+}
+else {
+   print("Соединение установлено");
+   // выполнение запросов
+   mysqli_set_charset($con, "utf8");
+   $sql = "SELECT * FROM project WHERE user_id = 1";
+	$result = mysqli_query($con, $sql);
+	if (!$result) {
+		$error = mysqli_error($con);
+		print("Ошибка MySQL: ". $error);
+}else {
+	$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+}
+
+$sql1 = "SELECT name FROM task WHERE user_id = 1";
+	$result1 = mysqli_query($con, $sql1);
+	if (!$result1) {
+		$error1 = mysqli_error($con);
+		print("Ошибка MySQL: ". $error1);
+}else {
+	$rows1 = mysqli_fetch_all($result1, MYSQLI_ASSOC);
+	
+}
+
+}
+?>								
 									
         <div class="content">
             <section class="content__side">
@@ -135,12 +169,12 @@ $show_complete_tasks = rand(0, 1);
 									   
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-							<?php for ($i = 0; $i < count($arr); $i++):?>
+							<?php for ($i = 0; $i < count($rows); $i++):?>
 										
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"> <?php echo $arr[$i]; ?> </a>
+                            <a class="main-navigation__list-item-link" href="#"> <?php echo $rows[$i]['name']; ?> </a>
 							
-                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$arr[$i]))?></span>
+                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$rows[$i]['name']))?></span>
 										
 									
                         </li>
@@ -183,7 +217,7 @@ $show_complete_tasks = rand(0, 1);
 				
 
                 <table class="tasks">
-										<?php foreach($arr2 as $key => $item):?>
+										<?php foreach($rows1 as $key => $item):?>
 										<?if ($item['Выполнен']=='Да' and $show_complete_tasks == false) { continue; }?>
                     <tr class="tasks__item task <? if ($item['Выполнен']=='Да' and $item['Срочный']=='Нет'){echo 'task--completed';}
 					elseif ($item['Срочный']=='Да'){echo'task--important';}?>">  
@@ -192,7 +226,7 @@ $show_complete_tasks = rand(0, 1);
 						
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?=$item['Задача'];?></span>
+                                <span class="checkbox__text"><?=$item['name'];?></span>
                             </label>
                         </td>
                         <td class="task__file">						
