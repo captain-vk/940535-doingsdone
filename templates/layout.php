@@ -64,9 +64,9 @@ $show_complete_tasks = rand(0, 1);
 							<?php for ($i = 0; $i < count($arr); $i++):?>
 										
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"> <?php echo $arr[$i]; ?> </a>
+                            <a class="main-navigation__list-item-link" href="#"> <?php echo $arr[$i]['name']; ?> </a>
 							
-                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$arr[$i]))?></span>
+                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$arr[$i]['name']))?></span>
 										
 									
                         </li>

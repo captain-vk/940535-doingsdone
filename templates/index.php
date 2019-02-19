@@ -35,7 +35,7 @@
 						
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?=$item['Задача'];?></span>
+                                <span class="checkbox__text"><?=$item['name'];?></span>
                             </label>
                         </td>
                         <td class="task__file">						
