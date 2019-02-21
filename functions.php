@@ -31,7 +31,7 @@
 				
 				function get_tasks($con, $name_proj){
 						mysqli_set_charset($con, "utf8");
-						   $sql = "SELECT name FROM task WHERE project_id = '$name_proj'";
+						   $sql = "SELECT name,project_id FROM task WHERE project_id = '$name_proj'";
 							$result = mysqli_query($con, $sql);
 							if (!$result) {
 								$error = mysqli_error($con);
@@ -47,7 +47,7 @@
 				 function CountTasks ($arr2, $str)	{
 							$j=0;
 							foreach($arr2 as $key => $item)	{
-							if ($item['project_id']=$str) {
+							if ($item['project_id']== $str) {
 								$j++;
 								}	
 							}
