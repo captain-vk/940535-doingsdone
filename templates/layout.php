@@ -1,14 +1,5 @@
 				<?php
- function CountTasks ($arr2, $str)	{
-	$j=0;
-	foreach($arr2 as $key => $item)	{
-	if ($item['Категория']==$str) {
-		$j++;
-		}	
-	}
-	return $j;
-	
-}
+
 ?>
 
 <?php
@@ -64,9 +55,9 @@ $show_complete_tasks = rand(0, 1);
 							<?php for ($i = 0; $i < count($arr); $i++):?>
 										
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"> <?php echo $arr[$i]['name']; ?> </a>
+                            <a class="main-navigation__list-item-link" href="<?php echo "index.php?id=" .  $arr[$i]['id']?>"> <?php echo $arr[$i]['name']; ?> </a>
 							
-                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$arr[$i]['name']))?></span>
+                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$arr[$i]['id']))?></span>
 										
 									
                         </li>

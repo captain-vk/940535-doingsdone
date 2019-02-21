@@ -9,8 +9,11 @@
 						//$arr = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];		
 						//$arr[] = $rows;
 						//var_dump($arr);
-						$arr2=get_tasks($con);
-						
+												
+						 if (isset($_GET['id']) && $_GET['id'] !== null) {							 
+								$arr2=get_tasks($con, $_GET['id']);
+							}
+						//var_dump($arr2);	
 						?>
 						
 						<?php 
