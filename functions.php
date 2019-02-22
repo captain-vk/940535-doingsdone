@@ -32,7 +32,7 @@
 				function get_tasks($con, $proj_id=null){
 						mysqli_set_charset($con, "utf8");
 						
-						if ($name_proj==null){
+						if ($proj_id==null){
 							$sql = "SELECT name,project_id FROM task";							
 						}
 						   else {
@@ -74,9 +74,13 @@
 						//var_dump($rows);
 							if ($item['id']== $id) {
 								return 'true';
-								}									
+								
+								}		
 							}
+							//echo "qweer";
 							return 'false';
+							
+							
 				};
 				
 				
