@@ -3,17 +3,23 @@
 				
 						
 						<?php 		
-						
+						$arr3=check_id($con,$_GET['id']);
+						echo ($arr3);
 						$arr=get_projects($con);
 						//var_dump($arr);
 						//$arr = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];		
 						//$arr[] = $rows;
 						//var_dump($arr);
 												
-						 if (isset($_GET['id']) && $_GET['id'] !== null) {							 
-								$arr2=get_tasks($con, $_GET['id']);
-							}
-						//var_dump($arr2);	
+						 		if (isset($_GET['id']) && $arr3=='true') {					 
+								$arr2=get_tasks($con, $_GET['id']);}
+								else if(isset($_GET['id']) && $arr3=='false'){
+								header("HTTP/1.0 404 Not Found");
+								exit();
+								}
+								else if ($_GET['id']==null){
+								$arr2=get_tasks($con);}
+
 						?>
 						
 						<?php 
