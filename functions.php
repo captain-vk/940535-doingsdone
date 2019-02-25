@@ -83,6 +83,28 @@
 							
 				};
 				
+				function check_date_format($date) {
+    $result = false;
+    $regexp = '/(\d{2})\.(\d{2})\.(\d{4})/m';
+    if (preg_match($regexp, $date, $parts) && count($parts) == 4) {
+        $result = checkdate($parts[2], $parts[1], $parts[3]);
+    }
+    return $result;
+}
+				
+				function add_tasks($con, $execution_date, $name, $project_id,$url){
+						mysqli_set_charset($con, "utf8");
+						   $sql = "INSERT INTO task (execution_date, status, name, project_id, user_id,link) VALUES ($execution_date, 0, $name, $project_id, 1,$url)";
+							$result = mysqli_query($con, $sql);
+							 if ($result) {
+									  echo '<p>Данные успешно добавлены в таблицу.</p>';
+									  
+									} else {
+									  echo '<p>Произошла ошибка: ' . mysqli_error($con) . '</p>';
+									}	
+								  };
+
+									return $result;
 				
 				
 					?>

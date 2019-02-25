@@ -1,6 +1,6 @@
 				<?php require_once ('functions.php')?>
 				<?php require_once ('init.php')?>
-				
+			
 						
 						<?php 		
 						//$arr3=check_id($con,$_GET['id']);
@@ -9,7 +9,7 @@
 						//var_dump($arr);
 						//$arr = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];		
 						//$arr[] = $rows;
-						//var_dump($arr);
+						var_dump($arr);
 												
 						 		if (isset($_GET['id']))	{
 									$arr3=check_id($con,$_GET['id']);
@@ -80,6 +80,8 @@
 												
 						?>						
 				<?php $OnDisplay = include_template('index.php',  ['arr2' => $arr2]);?>
+
+				
 				<?php $LayoutContent = include_template('layout.php', 
 				['Content' => $OnDisplay,
 				'arr2' => $arr2,	
