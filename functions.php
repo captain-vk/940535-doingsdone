@@ -72,13 +72,13 @@
 								}						
 					foreach($rows as $key => $item)	{
 						//var_dump($rows);
-							if ($item['id']== $id) {
-								return 'true';
+							if ($item['id']== (int)$id) {
+								return true;
 								
 								}		
 							}
 							//echo "qweer";
-							return 'false';
+							return false;
 							
 							
 				};
@@ -92,9 +92,9 @@
     return $result;
 }
 				
-				function add_tasks($con, $execution_date, $name,$url,$project_id){
+				function add_tasks($con, $execution_date, $name, $project_id, $url){
 						mysqli_set_charset($con, "utf8");
-						   $sql = "INSERT INTO task (execution_date, status, name, file_link,project_id, user_id) VALUES ($execution_date, 0, $name,$url, $project_id, 1)";
+						   $sql = "INSERT INTO task (execution_date, status, name, file_link,project_id, user_id) VALUES ($execution_date, 0, $name, $url, $project_id, 1)";
 							$result = mysqli_query($con, $sql);
 							 if ($result) {
 									  echo '<p>Данные успешно добавлены в таблицу.</p>';
