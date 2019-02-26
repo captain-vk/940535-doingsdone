@@ -1,7 +1,7 @@
 ALTER TABLE project ADD user_id INT;
 ALTER TABLE task ADD project_id INT;
 ALTER TABLE task ADD user_id INT;
-ALTER TABLE task ADD link CHAR(100);
+/*ALTER TABLE task ADD link CHAR(100);*/
 
 INSERT INTO project (id, name,user_id)
 VALUES (1,'Входящие',1);
@@ -18,23 +18,23 @@ VALUES (4,'Домашние дела',1);
 INSERT INTO project (id, name,user_id)
 VALUES (5,'Авто',5);
 
-INSERT INTO task (id,  execution_date, status, name, project_id, user_id,link)
-VALUES (1,'01.12.2019',0,'Собеседование в IT компании',1,1,null);
+INSERT INTO task (id,  execution_date, status, name, file_link,project_id, user_id)
+VALUES (1,'01.12.2019',0,'Собеседование в IT компании',null,1,1);
 
-INSERT INTO task (id,  execution_date, status, name, project_id,user_id,link)
-VALUES (2,'12.02.2019',0,'Выполнить тестовое задание',1,3,null);
+INSERT INTO task (id,  execution_date, status, name, file_link, project_id,user_id)
+VALUES (2,'12.02.2019',0,'Выполнить тестовое задание',null,1,3);
 
-INSERT INTO task (id,  execution_date, status, name, project_id,user_id,link)
-VALUES (3,'12.02.2019',1,'Сделать задание первого раздела',3,1,null);
+INSERT INTO task (id,  execution_date, status, name, file_link, project_id,user_id)
+VALUES (3,'12.02.2019',1,'Сделать задание первого раздела',null,3,1);
 
-INSERT INTO task (id,  execution_date, status, name, project_id,user_id,link)
-VALUES (4,'22.12.2019',0,'Встреча с другом',1,2,null);
+INSERT INTO task (id,  execution_date, status, name, file_link, project_id,user_id)
+VALUES (4,'22.12.2019',0,'Встреча с другом',null,1,2);
 
-INSERT INTO task (id, status, name, project_id,user_id,link)
-VALUES (5, 0, 'Купить корм для кота',4,1,null);
+INSERT INTO task (id, status, name, file_link, project_id,user_id)
+VALUES (5, 0, 'Купить корм для кота',null,4,1);
 
-INSERT INTO task (id, status, name, project_id,user_id,link)
-VALUES (6, 0, 'Заказать пиццу',4,3,null);
+INSERT INTO task (id, status, name, file_link, project_id,user_id)
+VALUES (6, 0, 'Заказать пиццу',null,4,3);
 
 INSERT INTO users (id,  registration_date, email, name, pass )
 VALUES (1,'2019-12-12','xxx@ya.ru','Вася', '111');

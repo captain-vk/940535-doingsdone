@@ -92,9 +92,9 @@
     return $result;
 }
 				
-				function add_tasks($con, $execution_date, $name, $project_id,$url){
+				function add_tasks($con, $execution_date, $name,$url,$project_id){
 						mysqli_set_charset($con, "utf8");
-						   $sql = "INSERT INTO task (execution_date, status, name, project_id, user_id,link) VALUES ($execution_date, 0, $name, $project_id, 1,$url)";
+						   $sql = "INSERT INTO task (execution_date, status, name, file_link,project_id, user_id) VALUES ($execution_date, 0, $name,$url, $project_id, 1)";
 							$result = mysqli_query($con, $sql);
 							 if ($result) {
 									  echo '<p>Данные успешно добавлены в таблицу.</p>';
