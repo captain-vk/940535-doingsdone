@@ -39,9 +39,9 @@
                             </label>
                         </td>
                         <td class="task__file">						
-                            <a class="download-link" href="#">Home.psd</a>
+                            <a class="download-link" href="<?=$item['file_link'];?>">Home.psd</a>
                         </td>
-                        <td class="task__date"><?=$item['Дата выполнения'];?></td>
+                        <td class="task__date"><?=$item['execution_date'];?></td>
 						<? endforeach; ?>
                     </tr>
 				 <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->

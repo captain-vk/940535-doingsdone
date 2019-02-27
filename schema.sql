@@ -15,7 +15,7 @@ creation_date  DATETIME,
 execution_date DATETIME,
 status          INT DEFAULT 0,
 name           CHAR(64) UNIQUE,
-file_link      TEXT(1000),
+file_link      CHAR(100),
 timeline       DATETIME  
 );
 

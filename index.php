@@ -1,6 +1,6 @@
 				<?php require_once ('functions.php')?>
 				<?php require_once ('init.php')?>
-				
+			
 						
 						<?php 		
 						//$arr3=check_id($con,$_GET['id']);
@@ -17,7 +17,7 @@
 									if ( $arr3==true)	{
 										//echo "asdfgghjjj";
 										$arr2=get_tasks($con, $_GET['id']);		
-											//var_dump($arr2);
+											
 									} 
 									else {
 											header("HTTP/1.0 404 Not Found");
@@ -30,7 +30,7 @@
 										};						
 								
 								
-								
+								//var_dump($arr2);
 								/*&& $arr3==true && $_GET['id']!=null) {					 
 								$arr2=get_tasks($con, $_GET['id']);																						
 								}								
@@ -80,6 +80,8 @@
 												
 						?>						
 				<?php $OnDisplay = include_template('index.php',  ['arr2' => $arr2]);?>
+
+				
 				<?php $LayoutContent = include_template('layout.php', 
 				['Content' => $OnDisplay,
 				'arr2' => $arr2,	
