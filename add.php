@@ -1,12 +1,8 @@
-							<?php require_once ('functions.php')?>
-							<?php require_once ('init.php')?>
-							<?php 		
-								$arr=get_projects($con);
-								$arr2=get_tasks($con);?>
-						
-				
-				<?php 
-				
+<?php 
+require_once ('functions.php');
+require_once ('init.php');							
+$arr=get_projects($con);
+$arr2=get_tasks($con);				
 				$errors=[];
 				
 				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,8 +14,7 @@
 					
 					if (check_id($con,$_POST['project'])!==true) {
 					$errors['project']='Проект не существует!'; }
-					var_dump($_POST);
-					
+					//var_dump($_POST);					
 					//$arr_alarms=[
 					///'Название'=>$check_name_task,
 					//'Дата выполнения'=>$check_date_exec,
@@ -27,10 +22,8 @@
 					//var_dump($arr_alarms);
 					$time=$_POST['date'];
 					$time=str_replace('.', '-', $time);
-					$time=date_create($time)->Format('Y-m-d');
-					
-					//echo($time);
-						
+					$time=date_create($time)->Format('Y-m-d');					
+					//echo($time);						
 							if ($errors==null){
 								$file_url = '';
 								if (isset($_FILES['preview'])) {
@@ -40,7 +33,7 @@
 							move_uploaded_file($_FILES['preview']['tmp_name'], $file_path . $file_name);
 							
 							}
-								$new_task = add_tasks($con, $time,$_POST['name'], $_POST['project'],$file_url);
+									$new_task = add_tasks($con, $time,$_POST['name'], $_POST['project'],$file_url);
 									//echo($new_task);
 									if ($new_task){	
 																
@@ -48,18 +41,8 @@
 									}
 							}
 								
-				}
-								
-							
-							?>
-							
-					
-						<?php 
+				}					
 						//var_dump($errors);
-						$to_add = include_template('add.php',['arr'=>$arr, 'errors'=>$errors]);?>	
-						
-				<?php $to_layout = include_template('layout.php',  ['Content_from_add' => $to_add,'arr'=>$arr,'arr2'=>$arr2, 'errors'=>$errors]);
+						$to_add = include_template('add.php',['arr'=>$arr, 'errors'=>$errors]);						
+				$to_layout = include_template('layout.php',  ['Content_from_add' => $to_add,'arr'=>$arr,'arr2'=>$arr2, 'errors'=>$errors]);
 				print($to_layout);?>	
-				
-				
-							

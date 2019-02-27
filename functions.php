@@ -97,16 +97,8 @@
 						 $sql = "INSERT INTO task (execution_date, name,file_link, project_id,user_id) VALUES ('$execution_date','$name','$url', $project_id,2)";
 							$result = mysqli_query($con, $sql);
 							 if ($result) {
-									  echo '<p>Данные успешно добавлены в таблицу.</p>';
-									  
+									  //echo '<p>Данные успешно добавлены в таблицу.</p>';
+									  return true;
 									} else {
-									  echo '<p>Произошла ошибка: ' . mysqli_error($con) . '</p>';
-									}	
-								  };
-
-									return $result;
-				
-				
-					?>
-
-
+									  //echo '<p>Произошла ошибка: ' . mysqli_error($con) . '</p>';
+									  return false;}};?>
