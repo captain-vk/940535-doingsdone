@@ -9,7 +9,7 @@
 						//var_dump($arr);
 						//$arr = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];		
 						//$arr[] = $rows;
-						var_dump($arr);
+						//var_dump($arr);
 												
 						 		if (isset($_GET['id']))	{
 									$arr3=check_id($con,$_GET['id']);
@@ -17,7 +17,7 @@
 									if ( $arr3==true)	{
 										//echo "asdfgghjjj";
 										$arr2=get_tasks($con, $_GET['id']);		
-											//var_dump($arr2);
+											
 									} 
 									else {
 											header("HTTP/1.0 404 Not Found");
@@ -30,7 +30,7 @@
 										};						
 								
 								
-								
+								//var_dump($arr2);
 								/*&& $arr3==true && $_GET['id']!=null) {					 
 								$arr2=get_tasks($con, $_GET['id']);																						
 								}								

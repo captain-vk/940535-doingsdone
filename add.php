@@ -26,26 +26,30 @@
 					//'Проект'=>$check_id];
 					//var_dump($arr_alarms);
 					$time=$_POST['date'];
-					$time_1=str_replace('.', '-', $time);
+					$time=str_replace('.', '-', $time);
+					$time=date_create($time)->Format('Y-m-d');
 					
-							$date_exec_task=date('Y-m-d', strtotime("time_1"));
-					echo($date_exec_task);
+					//echo($time);
 						
 							if ($errors==null){
-								
-								$new_task = add_tasks($con, $date_exec_task,$_POST['name'], $_POST['project'],$file_url);
-								if ($new_task){	
-								
+								$file_url = '';
 								if (isset($_FILES['preview'])) {
-							$file_name = $_FILES['preview']['name'];
-							$file_path =_DIR_ . '/uploads/';
-							$file_url = '/uploads/' . $file_name;
-							 move_uploaded_file($_FILES['preview']['tmp_name'], $file_path . $file_name);
-							}								
-									header('Location: /index.php');
-								}
+						       $file_name = $_FILES['preview']['name'];
+							   $file_path =__DIR__. '/uploads/';
+						       $file_url = '/uploads/' . $file_name;
+							move_uploaded_file($_FILES['preview']['tmp_name'], $file_path . $file_name);
+							
 							}
-							};
+								$new_task = add_tasks($con, $time,$_POST['name'], $_POST['project'],$file_url);
+									//echo($new_task);
+									if ($new_task){	
+																
+										header('Location: /index.php');
+									}
+							}
+								
+				}
+								
 							
 							?>
 							

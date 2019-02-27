@@ -33,10 +33,10 @@
 						mysqli_set_charset($con, "utf8");
 						
 						if ($proj_id==null){
-							$sql = "SELECT name,project_id FROM task";							
+							$sql = "SELECT name,execution_date,file_link,project_id FROM task";							
 						}
 						   else {
-							   $sql = "SELECT name,project_id FROM task WHERE project_id = '$proj_id'";
+							   $sql = "SELECT name,execution_date,file_link,project_id FROM task WHERE project_id = '$proj_id'";
 						   }
 							$result = mysqli_query($con, $sql);
 							if (!$result) {
@@ -94,7 +94,7 @@
 				
 				function add_tasks($con, $execution_date, $name, $project_id, $url){
 						mysqli_set_charset($con, "utf8");
-						   $sql = "INSERT INTO task (execution_date, status, name, file_link,project_id, user_id) VALUES ($execution_date, 0, $name, $url, $project_id, 1)";
+						 $sql = "INSERT INTO task (execution_date, name,file_link, project_id,user_id) VALUES ('$execution_date','$name','$url', $project_id,2)";
 							$result = mysqli_query($con, $sql);
 							 if ($result) {
 									  echo '<p>Данные успешно добавлены в таблицу.</p>';
