@@ -1,7 +1,3 @@
-				<?php
-
-?>
-
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
@@ -70,8 +66,10 @@ $show_complete_tasks = rand(0, 1);
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
 
-<?php echo $Content; ?>
-<?php echo $Content_from_add; ?>
+<?php echo $Content; 
+echo $Content_from_add; 
+echo $Content_from_register;
+?>
 
         </div>
     </div>
