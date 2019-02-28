@@ -19,7 +19,10 @@ $show_complete_tasks = rand(0, 1);
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
-        <header class="main-header">
+        <?php 
+		//var_dump($auth);
+		//echo($_SESSION);
+		if ($auth){echo '<header class="main-header">
             <a href="/">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
@@ -35,11 +38,20 @@ $show_complete_tasks = rand(0, 1);
                     <div class="user-menu__data">
                         <p>Константин</p>
 
-                        <a href="#">Выйти</a>
+                        <a href="logout.php">Выйти</a>
                     </div>
                 </div>
             </div>
-        </header>
+        </header>';} else echo '<header class="main-header">
+        <a href="#">
+          <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
+        </a>
+
+        <div class="main-header__side">
+          <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+        </div>
+		</header>';?>
+		
 									
         <div class="content">
             <section class="content__side">
@@ -69,6 +81,7 @@ $show_complete_tasks = rand(0, 1);
 <?php echo $Content; 
 echo $Content_from_add; 
 echo $Content_from_register;
+echo $Content_from_auth;
 ?>
 
         </div>
