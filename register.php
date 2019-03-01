@@ -1,8 +1,8 @@
 <?php 
 require_once ('functions.php');
 require_once ('init.php');	
-$arr=get_projects($con);
-$arr2=get_tasks($con);	
+$arr=get_projects($con,$_SESSION['id']);
+$arr2=get_tasks($con,$_SESSION['id']);	
 $arr_users = get_users($con);
 //var_dump($arr_users);
 $errors=[];

@@ -36,7 +36,7 @@ $show_complete_tasks = rand(0, 1);
                     </div>
 
                     <div class="user-menu__data">
-                        <p>Константин</p>
+                        <p>'.$_SESSION['name'].'</p>
 
                         <a href="logout.php">Выйти</a>
                     </div>
@@ -53,7 +53,9 @@ $show_complete_tasks = rand(0, 1);
 		</header>';?>
 		
 									
-        <div class="content">
+       
+ <div class="content">
+<?php if ($auth):?>
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
 									
@@ -65,23 +67,35 @@ $show_complete_tasks = rand(0, 1);
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="<?php echo "index.php?id=" .  $arr[$i]['id']?>"> <?php echo $arr[$i]['name']; ?> </a>
 							
-                            <span class="main-navigation__list-item-count"><? echo(CountTasks($arr2,$arr[$i]['id']))?></span>
+                            <span class="main-navigation__list-item-count"><?php echo(CountTasks($arr2,$arr[$i]['id']))?></span>
 										
 									
                         </li>
 						<?php endfor; ?>
                     </ul>
                 </nav>
-									 
-									
+				
                 <a class="button button--transparent button--plus content__side-button"
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
-            </section>
+            </section> 			
+<?php endif; ?>									 
+<?php if (!$auth):?>	
+		<section class="content__side">
+        <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
+
+        <a class="button button--transparent content__side-button" href="../auth.php">Войти</a>
+      </section>
+<?php endif; ?>	
+
+
+			
+			
 
 <?php echo $Content; 
 echo $Content_from_add; 
 echo $Content_from_register;
 echo $Content_from_auth;
+echo $Content_from_guest;
 ?>
 
         </div>

@@ -1,10 +1,13 @@
 <?php require_once ('functions.php');
 require_once ('init.php');
 session_start();
-echo($_SESSION['id']);
+//echo($_SESSION['id']);
 if (isset($_SESSION['id'])) {
 $auth=true;}
-else $auth=false;
+else {
+	$auth=false;
+header("Location: templates/guest.php");}
+
 						
 						//$arr3=check_id($con,$_GET['id']);
 						//echo ($arr3);
