@@ -1,4 +1,4 @@
-<?php function include_template($name, $data) {
+<?php function include_template($name, $data=null) {
     $name = 'templates/' . $name;
     $result = '';
 
@@ -14,9 +14,12 @@
 
     return $result;
 };
-	 function get_projects($con){
+	 function get_projects($con,$id=null){
 	 mysqli_set_charset($con, "utf8");
+	 if ($id!=null){
+	 $sql = "SELECT * FROM project where user_id='$id'";} else
 	 $sql = "SELECT * FROM project";
+		 
 	 $result = mysqli_query($con, $sql);
 		if (!$result) {
 			$error = mysqli_error($con);
@@ -26,15 +29,12 @@
 			return $rows;}
 			};
 				
-				function get_tasks($con, $proj_id=null){
+				function get_tasks($con, $user_id, $proj_id=null){
 						mysqli_set_charset($con, "utf8");
-						
-						if ($proj_id==null){
-							$sql = "SELECT name,execution_date,file_link,project_id FROM task";							
-						}
-						   else {
-							   $sql = "SELECT name,execution_date,file_link,project_id FROM task WHERE project_id = '$proj_id'";
-						   }
+						$sql = "SELECT name,execution_date,file_link,project_id FROM task WHERE user_id = '$user_id'";						
+						if ($proj_id!==null){
+							$sql.= "AND project_id = '$proj_id'";							
+						}								
 							$result = mysqli_query($con, $sql);
 							if (!$result) {
 								$error = mysqli_error($con);

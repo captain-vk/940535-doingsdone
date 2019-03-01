@@ -1,11 +1,17 @@
-				<?php require_once ('functions.php')?>
-				<?php require_once ('init.php')?>
-			
+<?php require_once ('functions.php');
+require_once ('init.php');
+session_start();
+//echo($_SESSION['id']);
+if (isset($_SESSION['id'])) {
+$auth=true;}
+else {
+	$auth=false;
+header("Location: templates/guest.php");}
+
 						
-						<?php 		
 						//$arr3=check_id($con,$_GET['id']);
 						//echo ($arr3);
-						$arr=get_projects($con);
+						$arr=get_projects($con,$_SESSION['id']);
 						//var_dump($arr);
 						//$arr = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];		
 						//$arr[] = $rows;
@@ -26,7 +32,7 @@
 								}															
 								
 									else {
-										$arr2=get_tasks($con);
+										$arr2=get_tasks($con,$_SESSION['id']);
 										};						
 								
 								
@@ -86,7 +92,8 @@
 				['Content' => $OnDisplay,
 				'arr2' => $arr2,	
 				'arr' => $arr,
-				'NamePage' => 'Дела в порядке']);
+				'NamePage' => 'Дела в порядке',
+				'auth'=>$auth]);
 				print($LayoutContent);
 				?>		 
 									

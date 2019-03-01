@@ -1,8 +1,13 @@
 <?php 
 require_once ('functions.php');
-require_once ('init.php');							
-$arr=get_projects($con);
-$arr2=get_tasks($con);				
+require_once ('init.php');		
+session_start();
+//echo($_SESSION['id']);
+if (isset($_SESSION['id'])) {
+$auth=true;}
+else $auth=false;					
+$arr=get_projects($con,$_SESSION['id']);
+$arr2=get_tasks($con,$_SESSION['id']);				
 				$errors=[];
 				
 				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -43,6 +48,6 @@ $arr2=get_tasks($con);
 								
 				}					
 						//var_dump($errors);
-						$to_add = include_template('add.php',['arr'=>$arr, 'errors'=>$errors]);						
-				$to_layout = include_template('layout.php',  ['Content_from_add' => $to_add,'arr'=>$arr,'arr2'=>$arr2, 'errors'=>$errors]);
+						$to_add = include_template('add.php',['arr'=>$arr, 'errors'=>$errors,'auth'=>$auth]);						
+				$to_layout = include_template('layout.php',  ['Content_from_add' => $to_add,'arr'=>$arr,'arr2'=>$arr2, 'errors'=>$errors,'auth'=>$auth]);
 				print($to_layout);?>	
