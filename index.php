@@ -16,24 +16,41 @@ header("Location: templates/guest.php");}
 						//$arr = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];		
 						//$arr[] = $rows;
 						//var_dump($arr);
+									
+					//echo($time);
+																
+								if (isset($_GET['tasks_today']))	{
+										$mode=1;
+										//(*фильтр Повестка дня*)										
+									} else if(isset($_GET['tasks_tomorrow'])){
+										$mode=2;	//(*фильтр Завтра*)										
+									} else if(isset($_GET['tasks_old'])){
+										$mode=3;	//(*фильтр Просроченные*)
+									} else $mode=0;
 												
 						 		if (isset($_GET['id']))	{
-									$arr3=check_id($con,$_GET['id']);
+									$arr3=check_id($con,$_GET['id'],'',$mode);
 									
 									if ( $arr3==true)	{
 										//echo "asdfgghjjj";
-										$arr2=get_tasks($con, $_GET['id']);		
+										$arr2=get_tasks($con, $_GET['id'],'',$mode);
+																				
 											
 									} 
 									else {
 											header("HTTP/1.0 404 Not Found");
 											exit();
 									}
-								}															
+								}							
 								
 									else {
-										$arr2=get_tasks($con,$_SESSION['id']);
+										$arr2=get_tasks($con,$_SESSION['id'],'',$mode);
+										echo($_SESSION['id']);
 										};						
+
+								
+								var_dump($arr2);
+								echo($mode);
 								
 								
 								//var_dump($arr2);
@@ -46,7 +63,13 @@ header("Location: templates/guest.php");}
 								header("HTTP/1.0 404 Not Found");
 								exit();
 								}*/
-
+								
+								
+								if ($_GET['complete_task']!==null){
+									$new_status=get_status($con,$_GET['complete_task']);	
+									header('Location: /index.php');
+											};
+											
 						?>
 						
 						<?php 
