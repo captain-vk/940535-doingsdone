@@ -76,7 +76,7 @@ $show_complete_tasks = rand(0, 1);
                 </nav>
 				
                 <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+                   href="project.php" target="project_add">Добавить проект</a>
             </section> 			
 <?php endif; ?>									 
 <?php if (!$auth):?>	
@@ -96,6 +96,7 @@ echo $Content_from_add;
 echo $Content_from_register;
 echo $Content_from_auth;
 echo $Content_from_guest;
+echo $Content_from_project;
 ?>
 
         </div>

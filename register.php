@@ -1,8 +1,8 @@
 <?php 
 require_once ('functions.php');
 require_once ('init.php');	
-$arr=get_projects($con,$_SESSION['id']);
-$arr2=get_tasks($con,$_SESSION['id']);	
+//$arr=get_projects($con,$_SESSION['id']);
+//$arr2=get_tasks($con,$_SESSION['id'],null,$mode);	
 $arr_users = get_users($con);
 //var_dump($arr_users);
 $errors=[];
@@ -30,6 +30,6 @@ $errors=[];
 					};
 //var_dump($errors);
 //var_dump($_POST);							
-$to_register = include_template('register.php',['arr_users'=>$arr_users, 'arr'=>$arr,'arr2'=>$arr2,'errors'=>$errors]);						
-$to_layout_from_register = include_template('layout.php',  ['Content_from_register' => $to_register,'arr_users'=>$arr_users,'arr'=>$arr,'arr2'=>$arr2,'errors'=>$errors]);
+$to_register = include_template('register.php',['arr_users'=>$arr_users,'errors'=>$errors]);						
+$to_layout_from_register = include_template('layout.php',  ['Content_from_register' => $to_register,'arr_users'=>$arr_users, 'errors'=>$errors]);
 print($to_layout_from_register);?>									
