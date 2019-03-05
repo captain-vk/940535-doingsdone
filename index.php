@@ -29,7 +29,7 @@ header("Location: templates/guest.php");}
 									} else $mode=0;
 												
 						 		if (isset($_GET['id']))	{
-									$arr3=check_id($con,$_GET['id'],'',$mode);
+									$arr3=check_id($con,$_GET['id'],null,$mode);
 									
 									if ( $arr3==true)	{
 										//echo "asdfgghjjj";
@@ -44,13 +44,13 @@ header("Location: templates/guest.php");}
 								}							
 								
 									else {
-										$arr2=get_tasks($con,$_SESSION['id'],'',$mode);
-										echo($_SESSION['id']);
+										$arr2=get_tasks($con,$_SESSION['id'],null,$mode);
+										//echo($_SESSION['id']);
 										};						
 
 								
-								var_dump($arr2);
-								echo($mode);
+								//var_dump($arr2);
+								//echo($mode);
 								
 								
 								//var_dump($arr2);

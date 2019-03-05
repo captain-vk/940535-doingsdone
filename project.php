@@ -7,7 +7,7 @@ if (isset($_SESSION['id'])) {
 $auth=true;}
 else $auth=false;					
 $arr=get_projects($con,$_SESSION['id']);
-$arr2=get_tasks($con,$_SESSION['id']);				
+$arr2=get_tasks($con,$_SESSION['id'],null,$mode);				
 $errors=[];					
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($_POST['name']==''){
@@ -20,12 +20,15 @@ $errors=[];
 			}
 		
 	if ($errors==null){
-	$new_project = add_project($con,$_POST['name'],$_SESSION['id'] );}
-	//if ($new_project){
-	//	header('Location: /index.php');
-	//}
-	var_dump($errors);
-	var_dump($_POST);	
+	$new_project = add_project($con,$_POST['name'],$_SESSION['id'] );
+	//echo($new_project);}
+	if ($new_project){
+	header('Location: /index.php');
+	//echo('asdasfdfdsfsd0');
+	}
+	//var_dump($errors);
+	//var_dump($_POST);	
+	}
 	};
 
 

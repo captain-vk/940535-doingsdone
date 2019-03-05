@@ -9,10 +9,10 @@
 
                 <div class="tasks-controls">
                     <nav class="tasks-switch">
-                        <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-                        <a href="/index.php?tasks_today" class="tasks-switch__item">Повестка дня</a>
-                        <a href="/index.php?tasks_tomorrow" class="tasks-switch__item">Завтра</a>
-                        <a href="/index.php?tasks_old" class="tasks-switch__item">Просроченные</a>
+                        <a href="/" class="tasks-switch__item <?php if (!isset($_GET['tasks_today']) && (!isset($_GET['tasks_tomorrow'])) && (!isset($_GET['tasks_old']))) echo 'tasks-switch__item--active';?>">Все задачи</a>
+                        <a href="/index.php?tasks_today" class="tasks-switch__item <?php if (isset($_GET['tasks_today'])) echo 'tasks-switch__item--active'?>">Повестка дня</a> 
+                        <a href="/index.php?tasks_tomorrow" class="tasks-switch__item <?php if (isset($_GET['tasks_tomorrow'])) echo 'tasks-switch__item--active';?>">Завтра</a>
+                        <a href="/index.php?tasks_old" class="tasks-switch__item <?php if (isset($_GET['tasks_old'])) echo 'tasks-switch__item--active';?>">Просроченные</a>
                     </nav>
 
                     <label class="checkbox">

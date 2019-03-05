@@ -2,7 +2,7 @@
 require_once ('functions.php');
 require_once ('init.php');	
 $arr=get_projects($con,$_SESSION['id']);
-$arr2=get_tasks($con,$_SESSION['id'],'',$mode);	
+$arr2=get_tasks($con,$_SESSION['id'],null,$mode);	
 $arr_users = get_users($con);	
 //var_dump($arr_users);
 $auth=[];

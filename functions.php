@@ -30,23 +30,32 @@
 			};
 				
 				function get_tasks($con, $user_id, $proj_id=null,$mode){
+						$date_time_now = date_create($time)->Format('Y-m-d H:i:s');	
 						$date_now=date_create($time)->Format('Y-m-d');	
 						$date_time_start=$date_now. ' 00:00:00';
 						$date_time_end=$date_now. ' 23:59:59';
-						echo($date_time);
+						$date_tomorrow = date("Y-m-d", strtotime("+1 days"));
+						$date_time_start_tomorrow=$date_tomorrow. ' 00:00:00';
+						$date_time_end_tomorrow=$date_tomorrow. ' 23:59:59';
+						//echo($date_tomorrow);
 						mysqli_set_charset($con, "utf8");
 						if ($mode == 0){
 						$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE user_id = '$user_id'";
-						echo('$user_id');}	
+						//echo('$user_id');
+						}	
 						
 						if ($proj_id!==null && $mode==0){
 							$sql.= "AND project_id = '$proj_id'";}
 						
 						if ($mode == 1){
-						$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date BETWEEN '$date_time_start' AND '$date_time_end'";}		
-						
+						$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date BETWEEN '$date_time_start' AND '$date_time_end' and user_id = '$user_id'";}
+												
 						if ($mode == 2){
-						$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date = '$time_now'";}							
+						$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date BETWEEN '$date_time_start_tomorrow' AND '$date_time_end_tomorrow'";}
+						
+						
+						if ($mode == 3){
+						$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date < '$date_time_start'";}							
 							$result = mysqli_query($con, $sql);
 						if (!$result) {
 								$error = mysqli_error($con);
@@ -101,9 +110,9 @@
     return $result;
 }
 				
-	function add_tasks($con, $execution_date, $name, $project_id, $url){
+	function add_tasks($con, $execution_date, $name, $project_id, $user_id, $url){
 		mysqli_set_charset($con, "utf8");
-		$sql = "INSERT INTO task (execution_date, name,file_link, project_id,user_id) VALUES ('$execution_date','$name','$url', $project_id,2)";
+		$sql = "INSERT INTO task (execution_date, name,file_link, project_id,user_id) VALUES ('$execution_date','$name','$url', $project_id, $user_id)";
 		$result = mysqli_query($con, $sql);
 		if ($result) {
 		//echo '<p>Данные успешно добавлены в таблицу.</p>';
@@ -139,7 +148,13 @@
 		mysqli_set_charset($con, "utf8");
 		$sql = "INSERT INTO project (name, user_id) VALUES ('$name', '$user')";
 		$result = mysqli_query($con, $sql);
-		};
+				if ($result) {
+		//echo '<p>Данные успешно добавлены в таблицу.</p>';
+			return true;
+			} else {
+		//	 echo '<p>Произошла ошибка: ' . mysqli_error($con) . '</p>';
+			return false;}
+			};		
 
 		function get_status($con, $id){
 		//mysqli_set_charset($con, "utf8");

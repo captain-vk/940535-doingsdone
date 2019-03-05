@@ -7,7 +7,7 @@ if (isset($_SESSION['id'])) {
 $auth=true;}
 else $auth=false;					
 $arr=get_projects($con,$_SESSION['id']);
-$arr2=get_tasks($con,$_SESSION['id']);				
+$arr2=get_tasks($con,$_SESSION['id'],null,$mode);				
 				$errors=[];
 				
 				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -38,7 +38,7 @@ $arr2=get_tasks($con,$_SESSION['id']);
 							move_uploaded_file($_FILES['preview']['tmp_name'], $file_path . $file_name);
 							
 							}
-									$new_task = add_tasks($con, $time,$_POST['name'], $_POST['project'],$file_url);
+									$new_task = add_tasks($con, $time,$_POST['name'], $_POST['project'],$_SESSION['id'],$file_url);
 									//echo($new_task);
 									if ($new_task){	
 																
