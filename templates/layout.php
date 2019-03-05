@@ -20,8 +20,6 @@ $show_complete_tasks = rand(0, 1);
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <?php 
-		//var_dump($auth);
-		//echo($_SESSION);
 		if ($auth){echo '<header class="main-header">
             <a href="/">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
@@ -82,15 +80,9 @@ $show_complete_tasks = rand(0, 1);
 <?php if (!$auth):?>	
 		<section class="content__side">
         <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
-
         <a class="button button--transparent content__side-button" href="../auth.php">Войти</a>
       </section>
 <?php endif; ?>	
-
-
-			
-			
-
 <?php echo $Content; 
 echo $Content_from_add; 
 echo $Content_from_register;
@@ -98,7 +90,6 @@ echo $Content_from_auth;
 echo $Content_from_guest;
 echo $Content_from_project;
 ?>
-
         </div>
     </div>
 </div>

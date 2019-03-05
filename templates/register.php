@@ -18,12 +18,8 @@
 
               <input class="form__input<?php if (isset($errors['password'])) {echo " form__input--error";}?>" type="password" name="password" id="password" value="<?php $_POST['password']; ?>" placeholder="Введите пароль">
             </div>
-
-
-
             <div class="form__row form__row--controls">
               <p class="error-message"><?php if (isset($errors['password'])||isset($errors['email'])||isset($errors['name_user'])){echo "Пожалуйста, исправьте ошибки в форме";}?></p>
-
               <input class="button" type="submit" name="" value="Зарегистрироваться">
             </div>
           </form>
