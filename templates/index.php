@@ -14,14 +14,12 @@
          <label class="checkbox">
                         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
             <input class="checkbox__input visually-hidden show_completed" type="checkbox"
-						<?php 
-						if ($show_complete_tasks == true) {	echo 'checked'; }
-						?> >
-                     <span class="checkbox__text">Показывать выполненные</span>
-                    </label>
-                </div>
+			<?php if ($show_complete_tasks == true) {echo 'checked'; }?> >
+             <span class="checkbox__text">Показывать выполненные</span>
+         </label>
+      </div>
                 <table class="tasks">
-						<?phpforeach($arr2 as $key => $item):?>
+						<?php foreach($arr2 as $key => $item):?>
 						<?if ($item['Выполнен']=='Да' and $show_complete_tasks == false) { continue; }?>
                     <tr class="tasks__item task  <? if ($item['Выполнен']=='Да'){echo 'task--completed';}?>"> 
                         <td class="task__select">						
@@ -38,8 +36,7 @@
 						<? endforeach; ?>
                     </tr>
 				 <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-				<?php 
-					if ($show_complete_tasks == false) : ?>
+				<?php if ($show_complete_tasks == false) : ?>
 					<tr class="tasks__item task task--completed">
 						<td class="task__select">
 							<label class="checkbox task__checkbox">
