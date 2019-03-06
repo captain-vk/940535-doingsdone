@@ -11,12 +11,13 @@ $arr=get_projects($con, $_SESSION['id']);
 $arr2=get_tasks($con, $_SESSION['id'], null, $mode);				
 $errors=[];					
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	if ($_POST['name'] == ''){
+    $name = $_POST['name'];
+
+	if (empty($name)) {
 		$errors['name'] = 'Введите название!' ;
-	}	
-	if ($_POST['name'] !== ''){
+	} else {
 		foreach($arr as $key => $item){
-		    if ($item['name'] == $_POST['name']){
+		    if ($item['name'] == $name) {
 				$errors['name'] = 'Такой проект уже имеется!' ;
 			}
 		}
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		header('Location: /index.php');
 	}
  };
-$to_project = include_template('project.php', ['arr_users' => $arr_users, 'arr' => $arr, 'arr2' => $arr2, 'errors' => $errors, 'auth' => $auth]);			
-$to_layout_from_project = include_template('layout.php',  ['Content_from_project' => $to_project, 'arr_users' => $arr_users, 'arr' => $arr, 'arr2' => $arr2,'errors' => $errors, 'auth' => $auth]);
+$to_project = include_template('project.php', ['errors' => $errors]);			
+$to_layout_from_project = include_template('layout.php',  ['Content' => $to_project, 'arr_users' => $arr_users, 'arr' => $arr, 'arr2' => $arr2,'errors' => $errors, 'auth' => $auth]);
 print($to_layout_from_project);
 ?>

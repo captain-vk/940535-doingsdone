@@ -27,6 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 };					
-$to_register = include_template('register.php',['arr_users' => $arr_users, 'errors' => $errors]);						
-$to_layout_from_register = include_template('layout.php',  ['Content_from_register' => $to_register,'arr_users' => $arr_users, 'errors' => $errors]);
+$to_register = include_template('register.php',['errors' => $errors]);						
+$to_layout_from_register = include_template('layout.php',  ['Content' => $to_register]);
 print($to_layout_from_register);?>									

@@ -7,8 +7,10 @@ if (isset($_SESSION['id'])){
 	$auth=false;
 	header("Location: templates/guest.php");
 }
-$arr=get_projects($con, $_SESSION['id']);	
-var_dump($arr2);				
+$arr = get_projects($con, $_SESSION['id']);	
+$arr2=get_tasks($con, $project_id,null,$mode, $show_complete_tasks);	
+$project_id = $_GET['id'];
+$show_complete_tasks = $_GET['show_completed'];			
 if (isset($_GET['tasks_today'])) {
 	$mode=1;
 } else if(isset($_GET['tasks_tomorrow'])) {
@@ -18,20 +20,20 @@ if (isset($_GET['tasks_today'])) {
 	$mode=3;//(*фильтр Просроченные*)
 	}	
   else $mode=0;												
-if (isset($_GET['id']))	{
-	$arr3=check_id($con,$_GET['id'],null,$mode);									
-	if ( $arr3==true){
-		$arr2=get_tasks($con, $_GET['id'],null,$mode);
+if ($project_id)	{
+	$arr3=check_id($con,$project_id,null,$mode);									
+	if ($arr3==true){
+		$arr2=get_tasks($con, $project_id,null,$mode, $show_complete_tasks);
 	} else {
 		header("HTTP/1.0 404 Not Found");
 		exit();
 	}
 } else {
-	$arr2=get_tasks($con,$_SESSION['id'],null,$mode);
+	$arr2=get_tasks($con,$_SESSION['id'],null,$mode, $show_complete_tasks);
 };						
-if ($_GET['complete_task']!==null){
-	$new_status=get_status($con,$_GET['complete_task']);	
-	header('Location: /index.php');	
+if ($_GET['check'] !== null && $_GET['task_id'] !== null) {
+    $new_status = get_status($con, $_GET['task_id']);
+    header('Location: /index.php');
 };
 $OnDisplay = include_template('index.php',  ['arr2' => $arr2]);
 $LayoutContent = include_template('layout.php', ['Content' => $OnDisplay, 'arr2' => $arr2,'arr' => $arr, 'NamePage' => 'Дела в порядке', 'auth'=>$auth]);

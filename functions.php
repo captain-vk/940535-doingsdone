@@ -1,4 +1,9 @@
 <?php 
+
+require_once 'functions.php';
+require_once 'mysql_helper.php';
+
+
 function include_template($name, $data = null) {
 	$name = 'templates/' . $name;
 	$result = '';
@@ -14,11 +19,12 @@ function include_template($name, $data = null) {
 function get_projects($con, $id = null){
 mysqli_set_charset($con, "utf8");	
 	if ($id != null) {
-		$sql = "SELECT * FROM project where user_id='$id'";
+		$sql = "SELECT * FROM project WHERE user_id = '$id'";
 	} else {
 		$sql = "SELECT * FROM project";		 
-		$result = mysqli_query($con, $sql);
 	};
+    $result = mysqli_query($con, $sql);
+
 	if (!$result) {
 		$error = mysqli_error($con);
 		return print("Ошибка MySQL: ". $error);
@@ -28,7 +34,7 @@ mysqli_set_charset($con, "utf8");
 	}
 };
 				
-function get_tasks($con, $user_id, $proj_id=null,$mode){
+function get_tasks($con, $user_id, $proj_id=null,$mode, $showCompleted = false){
 	$date_time_now = date_create($time)->Format('Y-m-d H:i:s');	
 	$date_now=date_create($time)->Format('Y-m-d');	
 	$date_time_start=$date_now. ' 00:00:00';
@@ -43,14 +49,19 @@ function get_tasks($con, $user_id, $proj_id=null,$mode){
 		$sql.= "AND project_id = '$proj_id'";
 	}						
 	if ($mode == 1) {
-		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date BETWEEN '$date_time_start' AND '$date_time_end' and user_id = '$user_id'";
+		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE user_id = '$user_id' and execution_date BETWEEN '$date_time_start' AND '$date_time_end' and user_id = '$user_id'";
 	}												
 	if ($mode == 2) {
-		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date BETWEEN '$date_time_start_tomorrow' AND '$date_time_end_tomorrow'";
+		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE user_id = '$user_id' and execution_date BETWEEN '$date_time_start_tomorrow' AND '$date_time_end_tomorrow'";
 	}	
 	if ($mode == 3) {
-		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE execution_date < '$date_time_start'";
-	}							
+		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE user_id = '$user_id' and execution_date < '$date_time_start'";
+	}						
+
+    if (!$showCompleted) {
+        $sql .= " AND status = 0";
+    }
+	
 	$result = mysqli_query($con, $sql);
 	if (!$result) {
 		$error = mysqli_error($con);
@@ -98,14 +109,13 @@ function check_date_format($date) {
 };
 				
 function add_tasks($con, $execution_date, $name, $project_id, $user_id, $url){
-	$sql = "INSERT INTO task (execution_date, name,file_link, project_id,user_id) VALUES ('$execution_date','$name','$url', $project_id, $user_id)";
-	$result = mysqli_query($con, $sql);
-	if ($result) {
-		return true;
-	} else {
-		return false;
-	}
+    $sql = "INSERT INTO task (execution_date, name, file_link, project_id,user_id) VALUES (?, ?, ?, ?, ?)";
+    $stmt = db_get_prepare_stmt($con, $sql, [$execution_date, $name, $url, $project_id, $user_id]);
+    $test = mysqli_stmt_execute($stmt);
+
+    return $test;
 };
+
 			
 function get_users($con){
 	$sql = "SELECT * FROM users";
@@ -118,22 +128,18 @@ function get_users($con){
 		return $rows;}
 };			
 function add_user($con, $email, $name, $pass){
-	$sql = "INSERT INTO users (email, name,pass) VALUES ('$email','$name','$pass')";
-	$result = mysqli_query($con, $sql);
-	if ($result) {
-		return true;
-	} else {
-		return false;}
-};			
+    $sql = "INSERT INTO users (email, name, pass) VALUES (?, ?, ?)";
+    $stmt = db_get_prepare_stmt($con, $sql, [$email, $name, $pass]);
+    return mysqli_stmt_execute($stmt);
+};
+
 function add_project($con, $name, $user){
-	$sql = "INSERT INTO project (name, user_id) VALUES ('$name', '$user')";
-	$result = mysqli_query($con, $sql);
-	if ($result) {
-		return true;
-	} else {
-		return false;}
-};		
-function get_status($con, $id){
+    $sql = "INSERT INTO project (name, user_id) VALUES (?, ?)";
+	$stmt = db_get_prepare_stmt($con, $sql, [$name, $user]);
+    return mysqli_stmt_execute($stmt);
+};
+
+function get_status($con, $id) {
 	$sql = "SELECT status FROM task WHERE id='$id'";
 	$result = mysqli_query($con, $sql);
 	if (!$result) {
@@ -141,17 +147,16 @@ function get_status($con, $id){
 		print("Ошибка MySQL: ". $error);
 	} else {
 		$rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
-	}		
-	if ($rows['status']=='0'){
-		$change_status = "UPDATE task SET status = 1 WHERE id = $id";				
-	} else if ($rows['status']=='1') {
-			$change_status = "UPDATE task SET status = 0 WHERE id = $id";
-			}	
-	$result_write = mysqli_query($con, $change_status);	
-	if ($result_write) {		
-		return true;
-	} else {
-		return false;
 	}
-};						
+
+	if ($rows['status']=='0'){
+        $status = 1;
+	} else if ($rows['status']=='1') {
+        $status = 0;
+	}
+
+	$sql = "UPDATE task SET status = ? WHERE id = ?";
+    $stmt = db_get_prepare_stmt($con, $sql, [$status, $id]);
+    return mysqli_stmt_execute($stmt);
+};
 ?>

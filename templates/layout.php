@@ -83,13 +83,7 @@ $show_complete_tasks = rand(0, 1);
         <a class="button button--transparent content__side-button" href="../auth.php">Войти</a>
       </section>
 <?php endif; ?>	
-<?php echo $Content; 
-echo $Content_from_add; 
-echo $Content_from_register;
-echo $Content_from_auth;
-echo $Content_from_guest;
-echo $Content_from_project;
-?>
+<?php echo $Content;?>
         </div>
     </div>
 </div>

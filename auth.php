@@ -1,13 +1,17 @@
 <?php 
 require_once ('functions.php');
 require_once ('init.php');	
-$arr_users = get_users($con);	
+
 $auth = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	if ($_POST['email'] == '') {
+	$email = $_POST['email'];
+    $password = $_POST['password'];
+    $arr_users = get_users($con);
+	
+	if (empty($email)) {
 		$auth['email'] = 'Введите имя!';
 	}
-	if ($_POST['password'] == '') {
+	if (empty($password)) {
 		$auth['password'] = 'Введите пароль!' ; 
 	} 		
 	if ($auth == null) {			
@@ -22,9 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					}
 				}
 			}
-		}		
+		}	
+		$auth['email'] = 'Неизвестный пользователь/неправильный пароль для пользователя';
 	}
 };	
-$to_auth = include_template('auth.php', ['arr_users' => $arr_users, 'arr' => $arr, 'arr2' => $arr2, 'auth' => $auth]);						
-$to_layout_from_auth = include_template('layout.php',  ['Content_from_auth' => $to_auth,'arr_users'=>$arr_users,'arr'=>$arr,'arr2'=>$arr2,'auth'=>$auth]);
+$to_auth = include_template('auth.php', ['auth' => $auth]);						
+$to_layout_from_auth = include_template('layout.php',  ['Content' => $to_auth]);
 print($to_layout_from_auth);?>									
