@@ -14,7 +14,7 @@ id       	   INT AUTO_INCREMENT PRIMARY KEY,
 creation_date  DATETIME,
 execution_date DATETIME,
 status          INT DEFAULT 0,
-name           CHAR(64) UNIQUE,
+name           CHAR(64),
 file_link      CHAR(100),
 timeline       DATETIME  
 );

@@ -6,6 +6,7 @@ if (isset($_SESSION['id'])) {
 	$auth=true;
 } else {
 	$auth=false;
+	header("Location: templates/guest.php");
 }	
 $arr=get_projects($con, $_SESSION['id']);
 $arr2=get_tasks($con, $_SESSION['id'], null, $mode);				

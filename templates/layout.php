@@ -19,36 +19,39 @@ $show_complete_tasks = rand(0, 1);
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
-        <?php 
-		if ($auth){echo '<header class="main-header">
-            <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
-            </a>
+        <?php if ($auth): ?>
+            <header class="main-header">
+                <a href="/">
+                    <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+                </a>
 
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__image">
-                        <img src="img/user.png" width="40" height="40" alt="Пользователь">
-                    </div>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__image">
+                            <img src="img/user.png" width="40" height="40" alt="Пользователь">
+                        </div>
 
-                    <div class="user-menu__data">
-                        <p>'.$_SESSION['name'].'</p>
+                        <div class="user-menu__data">
+                            <p><?php echo htmlspecialchars($_SESSION['name']) ?></p>
 
-                        <a href="logout.php">Выйти</a>
+                            <a href="logout.php">Выйти</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>';} else echo '<header class="main-header">
-        <a href="#">
-          <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
-        </a>
+            </header>
+        <?php else: ?>
+            <header class="main-header">
+                <a href="#">
+                  <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
+                </a>
 
-        <div class="main-header__side">
-          <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
-        </div>
-		</header>';?>
+                <div class="main-header__side">
+                  <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+                </div>
+    		</header>
+        <?php endif; ?>
 		
 									
        
@@ -68,22 +71,23 @@ $show_complete_tasks = rand(0, 1);
                             <span class="main-navigation__list-item-count"><?php echo(CountTasks($arr2,$arr[$i]['id']))?></span>
 										
 									
-                        </li>
-						<?php endfor; ?>
-                    </ul>
-                </nav>
-				
-                <a class="button button--transparent button--plus content__side-button"
-                   href="project.php" target="project_add">Добавить проект</a>
-            </section> 			
-<?php endif; ?>									 
-<?php if (!$auth):?>	
-		<section class="content__side">
-        <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
-        <a class="button button--transparent content__side-button" href="../auth.php">Войти</a>
-      </section>
-<?php endif; ?>	
-<?php echo $Content;?>
+ </li>
+                			<?php endfor; ?>
+                        </ul>
+                    </nav>
+
+                    <a class="button button--transparent button--plus content__side-button"
+                       href="project.php">Добавить проект</a>
+                </section>
+            <?php else: ?>
+                <section class="content__side">
+                    <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
+                    <a class="button button--transparent content__side-button" href="../auth.php">Войти</a>
+                </section>
+            <?php endif; ?>
+			<main class="content__main">
+            <?=$Content; ?>
+			</main>
         </div>
     </div>
 </div>
