@@ -4,7 +4,7 @@
 		<?php if (isset($errors['name_of_task_'])) {echo "Заполните поле";}?>
 		</p>
          <label class="form__label" for="name">Название <sup>*</sup></label>
-        <input class="form__input<?php if (isset($errors['name_of_task_'])) {echo " form__input--error";}?>" type="text" name="name" id="name" value="<?php $_POST['name_task']; ?>" placeholder="Введите название">
+        <input class="form__input<?php if (isset($errors['name_of_task_'])) {echo " form__input--error";}?>" type="text" name="name" id="name" value="<?php if (isset($field['name'])) {echo $field['name'];} ?>" placeholder="Введите название">
     </div>
     <div class="form__row">		  
 		<p class="form__message">
@@ -22,7 +22,7 @@
 			<?php if (isset($errors['date_exec_'])) {echo "Заполните поле";}?>
 		</p>
              <label class="form__label" for="date">Дата выполнения</label>
-			 <input class="form__input<?php if (isset($errors['date_exec_'])) {echo " form__input--error";}?> form__input--date" type="date" name="date" id="date" value="<?php $_POST['date_exec']; ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+			 <input class="form__input<?php if (isset($errors['date_exec_'])) {echo " form__input--error";}?> form__input--date" type="date" name="date" id="date" value="<?php if (isset($field['date'])) {echo $field['date'];} ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
     </div>
     <div class="form__row">
              <label class="form__label" for="preview">Файл</label>

@@ -1,8 +1,8 @@
 <?php 
-
-require_once 'functions.php';
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 require_once 'mysql_helper.php';
-
 
 function include_template($name, $data = null) {
 	$name = 'templates/' . $name;
@@ -17,7 +17,6 @@ function include_template($name, $data = null) {
 	return $result;
 };
 function get_projects($con, $id = null){
-mysqli_set_charset($con, "utf8");	
 	if ($id != null) {
 		$sql = "SELECT * FROM project WHERE user_id = '$id'";
 	} else {
@@ -25,24 +24,21 @@ mysqli_set_charset($con, "utf8");
 	};
     $result = mysqli_query($con, $sql);
 
-	if (!$result) {
-		$error = mysqli_error($con);
-		return print("Ошибка MySQL: ". $error);
-	} else {
+	if ($result) {
 		$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		return $rows;
-	}
+	} else return $rows=[];
 };
 				
-function get_tasks($con, $user_id, $proj_id=null,$mode, $showCompleted = false){
-	$date_time_now = date_create($time)->Format('Y-m-d H:i:s');	
-	$date_now=date_create($time)->Format('Y-m-d');	
+function get_tasks($con, $user_id, $proj_id=null,$mode = null, $showCompleted = false){
+	$date_time_now = date('Y-m-d H:i:s');	
+	$date_now=date('Y-m-d');	
 	$date_time_start=$date_now. ' 00:00:00';
 	$date_time_end=$date_now. ' 23:59:59';
 	$date_tomorrow = date("Y-m-d", strtotime("+1 days"));
 	$date_time_start_tomorrow=$date_tomorrow. ' 00:00:00';
 	$date_time_end_tomorrow=$date_tomorrow. ' 23:59:59';
-	if ($mode == 0){
+	if ($mode == 0 || $mode == null){
 		$sql = "SELECT id, status, name,execution_date,file_link,project_id FROM task WHERE user_id = '$user_id'";
 	}							
 	if ($proj_id!==null && $mode==0) {
@@ -63,13 +59,10 @@ function get_tasks($con, $user_id, $proj_id=null,$mode, $showCompleted = false){
     }
 	
 	$result = mysqli_query($con, $sql);
-	if (!$result) {
-		$error = mysqli_error($con);
-		return print("Ошибка MySQL: ". $error);
-	} else {
+	if ($result) {
 		$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		return $rows;
-	}
+	} else return $rows=[];
 };
 				
 function CountTasks ($arr2, $str)	{
@@ -85,10 +78,7 @@ function CountTasks ($arr2, $str)	{
 function check_id ($con, $id)	{
 	$sql_id = "SELECT id FROM project";		
 	$result = mysqli_query($con, $sql_id);
-	if (!$result) {
-		$error = mysqli_error($con);
-		return print("Ошибка MySQL: ". $error);
-	} else {
+	if ($result) {
 		$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 	}						
 	foreach($rows as $key => $item)	{
@@ -120,12 +110,10 @@ function add_tasks($con, $execution_date, $name, $project_id, $user_id, $url){
 function get_users($con){
 	$sql = "SELECT * FROM users";
 	$result = mysqli_query($con, $sql);
-	if (!$result) {
-		$error = mysqli_error($con);
-		return print("Ошибка MySQL: ". $error);
-	} else {
+	if ($result) {
 		$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-		return $rows;}
+		return $rows;
+	} else return $rows=[];
 };			
 function add_user($con, $email, $name, $pass){
     $sql = "INSERT INTO users (email, name, pass) VALUES (?, ?, ?)";
@@ -142,12 +130,9 @@ function add_project($con, $name, $user){
 function get_status($con, $id) {
 	$sql = "SELECT status FROM task WHERE id='$id'";
 	$result = mysqli_query($con, $sql);
-	if (!$result) {
-		$error = mysqli_error($con);
-		print("Ошибка MySQL: ". $error);
-	} else {
+	if ($result) {
 		$rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
-	}
+	} else return $rows=[];
 
 	if ($rows['status']=='0'){
         $status = 1;

@@ -1,8 +1,3 @@
-ALTER TABLE project ADD user_id INT;
-ALTER TABLE task ADD project_id INT;
-ALTER TABLE task ADD user_id INT;
-/*ALTER TABLE task ADD link CHAR(100);*/
-
 INSERT INTO project (id, name,user_id)
 VALUES (1,'Входящие',1);
 

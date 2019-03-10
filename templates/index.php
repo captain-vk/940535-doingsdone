@@ -20,7 +20,7 @@
       </div>
                 <table class="tasks">
 						<?php foreach($arr2 as $key => $item):?>
-						<?if ($item['Выполнен']=='Да' and $show_complete_tasks == false) { continue; }?>
+						<?if (isset ($item['Выполнен']) && $item['Выполнен']=='Да' && $show_complete_tasks == false) { continue; }?>
                     <tr class="tasks__item task  <? if ($item['Выполнен']=='Да'){echo 'task--completed';}?>"> 
                         <td class="task__select">						
                             <label class="checkbox task__checkbox">

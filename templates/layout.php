@@ -19,7 +19,7 @@ $show_complete_tasks = rand(0, 1);
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
-        <?php if ($auth): ?>
+        <?php if (!empty($auth)): ?>
             <header class="main-header">
                 <a href="/">
                     <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
@@ -56,7 +56,7 @@ $show_complete_tasks = rand(0, 1);
 									
        
  <div class="content">
-<?php if ($auth):?>
+<?php if (!empty($auth)):?>
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
 									

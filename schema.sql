@@ -6,17 +6,20 @@ USE deals_allright;
 
 CREATE TABLE project (
 id       INT AUTO_INCREMENT PRIMARY KEY,
-name     CHAR(128) UNIQUE
+name     CHAR(128),
+user_id  INT
 );
 
 CREATE TABLE task (
 id       	   INT AUTO_INCREMENT PRIMARY KEY,
 creation_date  DATETIME,
 execution_date DATETIME,
-status          INT DEFAULT 0,
+status         INT DEFAULT 0,
 name           CHAR(64),
 file_link      CHAR(100),
-timeline       DATETIME  
+timeline       DATETIME,
+project_id     INT,
+user_id        INT
 );
 
 CREATE TABLE users (

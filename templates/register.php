@@ -2,7 +2,7 @@
             <div class="form__row">
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-              <input class="form__input<?php if (isset($errors['email'])) {echo " form__input--error";}?>" type="text" name="email" id="email" value="<?php $_POST['email']; ?>" placeholder="Введите e-mail">
+              <input class="form__input<?php if (isset($errors['email'])) {echo " form__input--error";}?>" type="text" name="email" id="email" value="<?php if (isset($field['email'])) {echo $field['email'];} ?>" placeholder="Введите e-mail">
 
               <p class="form__message"><?php if (isset($errors['email'])) {echo "E-mail введён некорректно";}?></p>
             </div>
@@ -10,7 +10,7 @@
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input<?php if (isset($errors['name_user'])) {echo " form__input--error";}?>" type="text" name="name" id="name" value="<?php $_POST['name']; ?>" placeholder="Введите имя">
+              <input class="form__input<?php if (isset($errors['name_user'])) {echo " form__input--error";}?>" type="text" name="name" id="name" value="<?php if (isset($field['name'])) {echo $field['name'];} ?>" placeholder="Введите имя">
             </div>
 			
             <div class="form__row">
