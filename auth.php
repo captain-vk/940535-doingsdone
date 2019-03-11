@@ -1,9 +1,7 @@
 <?php 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 require_once ('functions.php');
 require_once ('init.php');	
+session_start();
 if (isset($_SESSION['id'])) {
 	header("Location: /index.php");
 }
@@ -50,6 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 };	
 $to_auth = include_template('auth.php', ['auth' => $auth, 'field' => $field]);						
-$to_layout_from_auth = include_template('layout.php',  ['Content' => $to_auth]);
+$to_layout_from_auth = include_template('layout.php',  ['Content' => $to_auth, 'NamePage' => 'Авторизация']);
 print($to_layout_from_auth);
 ?>									

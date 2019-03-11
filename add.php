@@ -1,7 +1,4 @@
 <?php 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 require_once ('functions.php');
 require_once ('init.php');		
 session_start();
@@ -25,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	};	
 	if (isset($_POST['date']))	{
 		$date = $_POST['date'];
-		$field['date'] = $date;
+		$field['date'] =  date_create($date)->Format('Y-m-d');
 	} else {
 		$date = null;
 		$field['date'] = null;
@@ -37,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$project = null;
 		$field['project'] = null;
 	};
+	//var_dump($field);
 if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
 		$errors['name_of_task_'] ='Введите название!' ;
 	}		
@@ -51,7 +49,6 @@ if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
     if (date('d.m.Y') != $date && $taskDate < $nowDate) {
         $errors['date_exec_'] = 'Указанная дата меньше текущей';
     }
-
 	$time=str_replace('.', '-', $date);
 	$time=date_create($time)->Format('Y-m-d');										
 	if ($errors==null){
@@ -61,7 +58,7 @@ if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
 			$userfile_extn = substr($file_name, strrpos($file_name, '.')+1);
 			$file_new_name = uniqid().'.'.$userfile_extn;
 			$file_path =__DIR__. '/uploads/';
-			$file_url = '/uploads/' . $file_name;
+			$file_url = '/uploads/' . $file_new_name;
 			move_uploaded_file($_FILES['preview']['tmp_name'], $file_path . $file_new_name);
 		}
 		$new_task = add_tasks($con, $time, $name, $project,$_SESSION['id'],$file_url);
@@ -71,5 +68,5 @@ if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
 	}
 }					
 $to_add = include_template('add.php',['arr' => $arr, 'errors' => $errors, 'auth' => $auth, 'field' => $field]);						
-$to_layout = include_template('layout.php',  ['Content' => $to_add, 'arr' => $arr, 'arr2' => $arr2, 'errors' => $errors, 'auth' => $auth]);
+$to_layout = include_template('layout.php',  ['Content' => $to_add, 'arr' => $arr, 'arr2' => $arr2, 'errors' => $errors, 'auth' => $auth, 'NamePage' => 'Добавление задачи']);
 print($to_layout);?>	

@@ -1,7 +1,4 @@
 <?php 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 require_once ('functions.php');
 require_once ('init.php');	
 session_start();
@@ -10,6 +7,7 @@ if (isset($_SESSION['id'])) {
 }
 $arr_users = get_users($con);
 $errors=[];
+$field=[];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['name']))	{
 		$name = $_POST['name'];
@@ -56,5 +54,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 };					
 $to_register = include_template('register.php',['errors' => $errors, 'field' => $field]);						
-$to_layout_from_register = include_template('layout.php',  ['Content' => $to_register]);
+$to_layout_from_register = include_template('layout.php',  ['Content' => $to_register,'NamePage' => 'Регистрация',]);
 print($to_layout_from_register);?>									

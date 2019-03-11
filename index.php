@@ -1,7 +1,4 @@
 <?php 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 require_once ('functions.php');
 require_once ('init.php');
 session_start();
@@ -9,7 +6,7 @@ if (isset($_SESSION['id'])){
 	$auth=true;
 } else {
 	$auth=false;
-	header("Location: templates/guest.php");
+	header("Location: guest.php");
 }
 $arr = get_projects($con, $_SESSION['id']);	
 if (isset($_GET['id'])){

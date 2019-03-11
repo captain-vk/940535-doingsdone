@@ -1,7 +1,4 @@
 <?php 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 require_once 'mysql_helper.php';
 
 function include_template($name, $data = null) {
@@ -27,7 +24,7 @@ function get_projects($con, $id = null){
 	if ($result) {
 		$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		return $rows;
-	} else return $rows=[];
+	} else return [];
 };
 				
 function get_tasks($con, $user_id, $proj_id=null,$mode = null, $showCompleted = false){

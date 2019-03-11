@@ -1,7 +1,4 @@
 <?php 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 require_once ('functions.php');
 require_once ('init.php');		
 session_start();
@@ -12,12 +9,16 @@ if (isset($_SESSION['id'])) {
 	}
 $arr=get_projects($con, $_SESSION['id']);
 $arr2=get_tasks($con, $_SESSION['id'], null, null);				
-$errors=[];					
+$errors=[];	
+$field=[];
+$new_project=null;				
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['name']))	{
 		$name = $_POST['name'];
+		$field['name'] = $name;
 	} else {
 		$name = null;
+		$field['name'] = null;
 	};
 	if ((empty($name)  || (!empty($name) && (strlen($name) > 128)))) {
 		$errors['name'] = 'Введите название!' ;
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		header('Location: /index.php');
 	}
  };
-$to_project = include_template('project.php', ['errors' => $errors]);			
-$to_layout_from_project = include_template('layout.php',  ['Content' => $to_project, 'arr' => $arr, 'arr2' => $arr2,'errors' => $errors, 'auth' => $auth]);
+$to_project = include_template('project.php', ['errors' => $errors, 'field' => $field]);			
+$to_layout_from_project = include_template('layout.php',  ['Content' => $to_project, 'arr' => $arr, 'arr2' => $arr2,'errors' => $errors, 'auth' => $auth, 'NamePage' => 'Добавление проекта']);
 print($to_layout_from_project);
 ?>
