@@ -11,8 +11,9 @@
 		</p>
          <label class="form__label" for="project">Проект</label>
 			<select class="form__input form__input--select" name="project" id="project">
+				<option value=""</option>			
 			<?php for ($i = 0; $i < count($arr); $i++):?>
-				<option value="<?php echo $arr[$i]['id'];?>"><?php echo $arr[$i]['name']; ?> </option>
+				<option <?if (isset($field['project']) && $field['project']==$arr[$i]['id']){echo 'selected';}?> value="<?php echo $arr[$i]['id'];?>"><?php echo $arr[$i]['name'];?> </option>
 			  <?php endfor; ?>
             </select>
     </div>
@@ -21,7 +22,7 @@
 			<?php if (isset($errors['date_exec_']) && $errors['date_exec_'] =='Указанная дата меньше текущей') {echo "Указанная дата меньше текущей";}?>
 		</p>
              <label class="form__label" for="date">Дата выполнения</label>
-			 <input class="form__input<?php if (isset($errors['date_exec_'])) {echo " form__input--error";}?> form__input--date" type="date" name="date" id="date" value="<?php if (isset($field['date'])) {echo $field['date'];} ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+			 <input class="form__input<?php if (isset($errors['date_exec_'])) {echo " form__input--error";}?> form__input--date" type="date" name="date" id="date" value="" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
     </div>
     <div class="form__row">
              <label class="form__label" for="preview">Файл</label>

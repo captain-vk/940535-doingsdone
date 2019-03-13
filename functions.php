@@ -95,15 +95,13 @@ function check_date_format($date) {
 	return $result;
 };
 				
-function add_tasks($con, $execution_date, $name, $project_id, $user_id, $url){
+function add_tasks($con, $execution_date, $name, $project_id = null, $user_id, $url){
     $sql = "INSERT INTO task (execution_date, name, file_link, project_id,user_id) VALUES (?, ?, ?, ?, ?)";
     $stmt = db_get_prepare_stmt($con, $sql, [$execution_date, $name, $url, $project_id, $user_id]);
     $test = mysqli_stmt_execute($stmt);
 
     return $test;
-};
-
-			
+};			
 function get_users($con){
 	$sql = "SELECT * FROM users";
 	$result = mysqli_query($con, $sql);

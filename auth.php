@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		foreach($arr_users as $key => $item) {
 			if ($item['email'] == $_POST['email']) {
 				if (password_verify($_POST['password'],$item['pass'])) {
-					session_start();
+
 					$_SESSION['id'] = $item['id'];
 					$_SESSION['name'] = $item['name'];
 					if (isset($_SESSION['id'])) {

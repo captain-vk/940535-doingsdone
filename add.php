@@ -28,13 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$field['date'] = null;
 	};
 	if (isset($_POST['project']))	{
-		$project = $_POST['project'];
-		$field['project'] = $project;
-	} else {
-		$project = null;
+		if (!empty($_POST['project'])) {
+			$project = $_POST['project'];
+			$field['project'] = $project;
+		} else {
+			$project = 0;
+			$field['project'] = null;
+		} 
+	}	else {
+		$project = 0;
 		$field['project'] = null;
 	};
-	//var_dump($field);
 if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
 		$errors['name_of_task_'] ='Введите название!' ;
 	}		
@@ -50,7 +54,7 @@ if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
         $errors['date_exec_'] = 'Указанная дата меньше текущей';
     }
 	$time=str_replace('.', '-', $date);
-	$time=date_create($time)->Format('Y-m-d');										
+	$time=date_create($time)->Format('Y-m-d');		
 	if ($errors==null){
 		$file_url = '';
 		if (isset($_FILES['preview'])) {
