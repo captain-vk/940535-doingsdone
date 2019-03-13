@@ -29,7 +29,9 @@
                             </label>
                         </td>
                         <td class="task__file">						
-                            <a class="download-link" href="<? if(isset($item['file_link'])) {echo $item['file_link'];}?>"></a>
+                           <?php if (isset($item['file_link'])&&!empty($item['file_link'])): ?>
+                                <a class="download-link" href="<?=$item['file_link'] ?>"></a>
+                            <?php endif; ?>
                         </td>
                         <td class="task__date"><?=date('d-m-Y', strtotime($item['execution_date']));?></td>
 						<? endforeach; ?>

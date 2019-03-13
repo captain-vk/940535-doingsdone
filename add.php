@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['date']))	{
 		$date = $_POST['date'];
 		$field['date'] =  $date;
-		//date_create($date)->Format('Y-m-d');
 	} else {
 		$date = null;
 		$field['date'] = null;
@@ -49,22 +48,24 @@ if ((empty($name)) || (!empty($name) && (strlen($name) > 64))) {
 	} 					
 
 	$taskDate = strtotime($date);
-    $nowDate = time();
+    $nowDate = time();	
 
-    if (date('d.m.Y') != $date && $taskDate < $nowDate) {
+    if (date('Y-m-d') != $date && $taskDate < $nowDate) {
         $errors['date_exec_'] = 'Указанная дата меньше текущей';
     }
 	$time=str_replace('.', '-', $date);
 	$time=date_create($time)->Format('Y-m-d');		
 	if ($errors==null){
-		$file_url = '';
-		if (isset($_FILES['preview'])) {
+	$file_url = '';
+		if (isset($_FILES['preview']) && !empty($_FILES['preview']['name'])) {
 			$file_name = $_FILES['preview']['name'];
 			$userfile_extn = substr($file_name, strrpos($file_name, '.')+1);
 			$file_new_name = uniqid().'.'.$userfile_extn;
 			$file_path =__DIR__. '/uploads/';
 			$file_url = '/uploads/' . $file_new_name;
 			move_uploaded_file($_FILES['preview']['tmp_name'], $file_path . $file_new_name);
+		} else {
+			$file_url = '';
 		}
 		$new_task = add_tasks($con, $time, $name, $project,$_SESSION['id'],$file_url);
 		if ($new_task){											
