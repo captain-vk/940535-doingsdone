@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	};	
 	if (isset($_POST['date']))	{
 		$date = $_POST['date'];
-		$field['date'] =  date_create($date)->Format('Y-m-d');
+		$field['date'] =  $date;
+		//date_create($date)->Format('Y-m-d');
 	} else {
 		$date = null;
 		$field['date'] = null;

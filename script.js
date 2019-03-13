@@ -27,9 +27,9 @@ if ($taskCheckboxes.length) {
   });
 }
 
-flatpickr('#date', {
+/*flatpickr('#date', {
   enableTime: false,
   dateFormat: "d.m.Y",
   time_24hr: true,
   locale: "ru"
-});
+});*/

@@ -22,7 +22,7 @@
 			<?php if (isset($errors['date_exec_']) && $errors['date_exec_'] =='Указанная дата меньше текущей') {echo "Указанная дата меньше текущей";}?>
 		</p>
              <label class="form__label" for="date">Дата выполнения</label>
-			 <input class="form__input<?php if (isset($errors['date_exec_'])) {echo " form__input--error";}?> form__input--date" type="date" name="date" id="date" value="" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+			 <input class="form__input<?php if (isset($errors['date_exec_'])) {echo " form__input--error";}?> form__input--date" type="date" name="date" id="date" value="<?php if (isset($field['date'])) {echo $field['date'];} ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
     </div>
     <div class="form__row">
              <label class="form__label" for="preview">Файл</label>
