@@ -14,7 +14,7 @@ $field=[];
 $new_project=null;				
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['name']))	{
-		$name = $_POST['name'];
+		$name = mb_convert_case($_POST['name'], MB_CASE_TITLE, 'UTF-8');
 		$field['name'] = $name;
 	} else {
 		$name = null;
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}		
 	if ($errors == null){
-		$new_project = add_project($con,$_POST['name'],$_SESSION['id'] );
+		$new_project = add_project($con,$name,$_SESSION['id'] );
 		}
 	if ($new_project){
 		header('Location: /index.php');
